@@ -17,6 +17,7 @@ const LoginModal = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { toast } = useToast();
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -31,6 +32,10 @@ const LoginModal = () => {
       console.log(parseRes);
       if (parseRes.authtoken) {
         localStorage.setItem("authtoken", parseRes.authtoken);
+        toast({
+          description: "Logged in Successfully",
+        });
+
         navigate("/dashboard");
       }
     } catch (error) {

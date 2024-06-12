@@ -1,38 +1,10 @@
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
 import SignUpModal from "./SignupModal";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import LoginModal from "./LoginModal";
 import { useNavigate } from "react-router-dom";
 const Hero = () => {
-  // const checkAuthenticated = async () => {
-  //   try {
-  //     const res = await fetch("http://localhost:5000/auth/is-verify", {
-  //       method: "POST",
-  //       headers: { token: localStorage.token },
-  //     });
-
-  //     const parseRes = await res.json();
-  //     console.log("is verify?", parseRes);
-
-  //     parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   checkAuthenticated();
-  //   console.log(isAuthenticated);
-  // }, []);
-
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // const setAuth = (boolean: boolean) => {
-  //   setIsAuthenticated(boolean);
-  //   console.log(isAuthenticated);
-  // };
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("authtoken")) {

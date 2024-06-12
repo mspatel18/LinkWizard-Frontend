@@ -33,7 +33,6 @@ const LinkCard: React.FC<LinkCardProps> = ({ linkElement, onLinkClick }) => {
   const [toEdit, setToEdit] = useState(false);
   const [name, setName] = useState(linkElement.name);
   const [link, setLink] = useState(linkElement.link);
-  const [deleteDialog, setDeleteDialog] = useState(false);
   const handleEdit = async () => {
     try {
       //   console.log(linkElement._id, name, link);

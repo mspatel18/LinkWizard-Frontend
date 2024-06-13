@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import LinkCard from "./LinkCard";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import LinkCard from "@/components/dashboard/LinkCard";
 import { useNavigate } from "react-router-dom";
 
 interface Link {
@@ -84,8 +84,8 @@ const Dashboard: React.FC = () => {
           <h2 className="text-xl font-semi text-center">Welcome, {username}</h2>
         )}
       </div>
-      <div className="flex flex-row  mt-4">
-        <div className=" h-screen  w-96 ">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 mt-4">
+        <div className=" sm:h-screen mx-6 sm:w-96 ">
           <div className=" ">
             <Card className=" ">
               <CardHeader>
@@ -94,16 +94,18 @@ const Dashboard: React.FC = () => {
               <CardContent className="flex gap-3 flex-col justify-center items-center ">
                 {links.map((link) => (
                   <div key={link._id}>
-                    <Button variant="outline" size="lg">
-                      <a href={link.link}>{link.name}</a>
-                    </Button>
+                    <a href={link.link}>
+                      <Button variant="default" size="lg" className="  px-24">
+                        🔗{link.name}
+                      </Button>
+                    </a>
                   </div>
                 ))}
               </CardContent>
             </Card>
           </div>
         </div>
-        <div className="mx-6 h-full w-full flex gap-4 flex-col shadow-sm">
+        <div className="mx-6  h-full sm:w-full flex gap-4 flex-col shadow-sm">
           {/* <h1>Dashboard</h1> */}
           {loading ? (
             <p>Loading...</p>

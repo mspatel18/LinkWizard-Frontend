@@ -27,11 +27,11 @@ const Hero = () => {
             duration: 0.5,
             ease: [0.4, 0.0, 0.2, 1],
           }}
-          className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+          className="text-2xl px-4 md:text-4xl  lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
         >
           LinkWizard
           <br />
-          <Highlight className="text-black  dark:text-white">
+          <Highlight className="text-black dark:text-white">
             Create, Share, and Manage your links.
           </Highlight>
         </motion.h1>

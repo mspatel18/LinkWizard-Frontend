@@ -44,7 +44,7 @@ const LoginModal = () => {
   };
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button variant="outline" size="lg">
           Login
         </Button>

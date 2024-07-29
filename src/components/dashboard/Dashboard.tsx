@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import LinkCard from "@/components/dashboard/LinkCard";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Link {
   name: string;
@@ -16,6 +17,7 @@ const Dashboard: React.FC = () => {
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [links, setLinks] = useState<Link[]>([]);
+  const { toast } = useToast();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -31,15 +33,25 @@ const Dashboard: React.FC = () => {
         },
         body: JSON.stringify({ name: name, link: link }),
       });
+
       const parseRes = await response.json();
-      console.log(parseRes);
+
       if (parseRes.success) {
         getLinks();
         setName("");
         setLink("");
+      } else {
+        throw new Error(parseRes.message || "Operation was not successful");
       }
     } catch (error) {
-      console.log(error);
+      // console.error("Error occurred:", error);
+
+      toast({
+        title: "Error",
+        variant: "destructive",
+        description: `${error}`,
+        duration: 3000,
+      });
     }
   };
   const getLinks = async () => {
@@ -57,13 +69,18 @@ const Dashboard: React.FC = () => {
         setLinks(parseRes.links);
         setUsername(parseRes.username);
         setLoading(false);
+      } else {
+        toast({ description: "Something went wrong" });
       }
     } catch (error) {
+      console.log("error checking for toast");
+      toast({
+        description: `${error}`,
+      });
       console.log(error);
     }
   };
   const handleLinkClick = (link: Link) => {
-    console.log("Link clicked:", link);
     getLinks();
     // Handle the link click event here, e.g., navigate to the link or perform some action
   };
@@ -81,7 +98,9 @@ const Dashboard: React.FC = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <h2 className="text-xl font-semi text-center">Welcome, {username}</h2>
+          <h2 className="text-xl mt-6 font-semi text-center capitalize">
+            Welcome, {username}
+          </h2>
         )}
       </div>
       <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 mt-4">
@@ -89,14 +108,27 @@ const Dashboard: React.FC = () => {
           <div className=" ">
             <Card className=" ">
               <CardHeader>
-                <CardTitle className="text-xl font-bold">Your Links</CardTitle>
+                <div className="flex justify-between items-start">
+                  <CardTitle className="text-xl font-bold">
+                    Your Links
+                  </CardTitle>
+                  <a href={`/${username}`} target="_blank">
+                    <Button variant="outline">Preview</Button>
+                  </a>
+                </div>
               </CardHeader>
-              <CardContent className="flex gap-3 flex-col justify-center items-center ">
+              <CardContent className="flex gap-3 flex-col justify-center items-stretch ">
                 {links.map((link) => (
                   <div key={link._id}>
                     <a href={link.link}>
-                      <Button variant="default" size="lg" className="  px-24">
-                        🔗{link.name}
+                      <Button
+                        variant="default"
+                        size="lg"
+                        className="w-full px-24"
+                      >
+                        <span className="truncate whitespace-wrap overflow-hidden">
+                          🔗{link.name}
+                        </span>
                       </Button>
                     </a>
                   </div>
@@ -105,7 +137,7 @@ const Dashboard: React.FC = () => {
             </Card>
           </div>
         </div>
-        <div className="mx-6  h-full sm:w-full flex gap-4 flex-col shadow-sm">
+        <div className="mx-6 mb-2 h-full sm:w-full flex gap-4 flex-col shadow-sm">
           {/* <h1>Dashboard</h1> */}
           {loading ? (
             <p>Loading...</p>
@@ -116,7 +148,9 @@ const Dashboard: React.FC = () => {
               {/* <div className=""> */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold">Add Links</CardTitle>
+                  <CardTitle className="text-xl font-bold">
+                    Add New Link
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form
@@ -127,13 +161,16 @@ const Dashboard: React.FC = () => {
                       type="text"
                       placeholder="Name"
                       value={name}
+                      required
                       onChange={(e) => {
                         setName(e.target.value);
                       }}
                     />
                     <Input
-                      type="text"
-                      placeholder="Link"
+                      type="url"
+                      placeholder="https://example.com"
+                      pattern="https://.*"
+                      required
                       value={link}
                       onChange={(e) => {
                         setLink(e.target.value);
@@ -150,6 +187,7 @@ const Dashboard: React.FC = () => {
                   <span>No links found.</span>
                 </Card>
               )}
+              <div className="text-xl font-bold">Edit Your Links</div>
               {links.map((link) => {
                 return (
                   <>

@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 interface Link {
   name: string;
   link: string;
@@ -33,6 +34,7 @@ const LinkCard: React.FC<LinkCardProps> = ({ linkElement, onLinkClick }) => {
   const [toEdit, setToEdit] = useState(false);
   const [name, setName] = useState(linkElement.name);
   const [link, setLink] = useState(linkElement.link);
+  const { toast } = useToast();
   const handleEdit = async () => {
     try {
       //   console.log(linkElement._id, name, link);
@@ -52,8 +54,11 @@ const LinkCard: React.FC<LinkCardProps> = ({ linkElement, onLinkClick }) => {
       if (parseRes.success) {
         setToEdit(false);
         onLinkClick(linkElement);
+      } else {
+        toast({ description: "Something went wrong", variant: "destructive" });
       }
     } catch (error) {
+      toast({ description: "Something went wrong" });
       console.log(error);
     }
   };
@@ -72,6 +77,8 @@ const LinkCard: React.FC<LinkCardProps> = ({ linkElement, onLinkClick }) => {
       const parseRes = await response.json();
       if (parseRes.success) {
         onLinkClick(linkElement);
+      } else {
+        toast({ description: "Something went wrong", variant: "destructive" });
       }
     } catch (error) {
       console.log(error);
@@ -82,17 +89,21 @@ const LinkCard: React.FC<LinkCardProps> = ({ linkElement, onLinkClick }) => {
       <Card key={linkElement._id}>
         <CardHeader>
           <CardTitle>Link </CardTitle>
-          <Input
-            disabled={!toEdit}
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
         </CardHeader>
         <CardContent>
-          <CardDescription>
+          <CardDescription className="flex flex-col gap-2 justify-start items-start">
             <Input
+              disabled={!toEdit}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <Input
+              type="url"
+              placeholder="https://example.com"
+              pattern="https://.*"
+              required
               disabled={!toEdit}
               value={link}
               onChange={(e) => {

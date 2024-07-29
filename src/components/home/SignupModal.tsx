@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
-import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
+// import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { useNavigate } from "react-router-dom";
 const SignUpModal = () => {
   const { toast } = useToast();
@@ -40,8 +40,6 @@ const SignUpModal = () => {
         body: JSON.stringify(inputs),
       });
       const parseRes = await response.json();
-      console.log(parseRes);
-      toast(parseRes.authtoken);
       if (parseRes.authtoken) {
         localStorage.setItem("authtoken", parseRes.authtoken);
         // setAuth(true);
@@ -54,7 +52,6 @@ const SignUpModal = () => {
         toast({
           variant: "destructive",
           title: "Uh oh! Something went wrong.",
-          description: parseRes,
         });
       }
     } catch (error) {
@@ -69,13 +66,14 @@ const SignUpModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <HoverBorderGradient
+        <Button size="lg">Sign Up</Button>
+        {/* <HoverBorderGradient
           containerClassName="rounded-lg"
           as="button"
           className="dark:bg-black bg-white text-black dark:text-white flex items-center space-x-2 px-8"
         >
           Sign Up
-        </HoverBorderGradient>
+        </HoverBorderGradient> */}
       </DialogTrigger>
       <DialogContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

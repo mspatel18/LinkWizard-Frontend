@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
       console.log(error);
     }
   };
-  const handleLinkClick = (link: Link) => {
+  const handleLinkClick = () => {
     getLinks();
     // Handle the link click event here, e.g., navigate to the link or perform some action
   };

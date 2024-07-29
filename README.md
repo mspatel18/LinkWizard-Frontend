@@ -1,30 +1,16 @@
-# React + TypeScript + Vite
+# LinkWizard: All Your Links at One Place
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Build using MERN stack and hosted on Vercel
 
-Currently, two official plugins are available:
+Here is my [LinkWizard](https://linkwizard.vercel.app/mspatel)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Create yours Now!!
 
-## Expanding the ESLint configuration
+## Some Screenshots
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Home Page: ![image](https://github.com/user-attachments/assets/bdf0f613-4db4-4253-98c4-cff186ad7c9e)
+- SignUp Dialog: ![image](https://github.com/user-attachments/assets/176bd47b-9cd2-4499-ac15-4fa2a18db353)
+- Dashboard: ![image](https://github.com/user-attachments/assets/f1be5526-4d7e-4802-9569-350808db0989)
+- LinkPreview Page: ![image](https://github.com/user-attachments/assets/1039cbe8-47d6-4a0e-aad8-35c05f78508c)
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<em>Thanks to [Shadcn](https://ui.shadcn.com/) and [Aceternity UI](https://ui.aceternity.com/) for the components.</em>
